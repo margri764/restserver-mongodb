@@ -20,6 +20,7 @@ const UserSchema = Schema({
     role: {
         type: String,
         required: true,
+        default: 'USER_ROE',
         emun: [ 'ADMIN_ROLE','USER_ROLE']
     },
     state: {
@@ -28,7 +29,7 @@ const UserSchema = Schema({
     },
     google: {
         type: Boolean,
-        required: false
+        default: false
     }
 
 });
