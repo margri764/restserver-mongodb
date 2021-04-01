@@ -11,6 +11,4 @@ const checkFields = (req, res, next) =>{
 
 }
 
-module.exports = {
-    checkFields
-}
+module.exports = { checkFields };

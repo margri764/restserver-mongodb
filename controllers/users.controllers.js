@@ -55,6 +55,7 @@ const usersPut= async (req, res) => {
     
     const { id } = req.params;
     const { _id, password,google, ...rest } = req.body;
+    
     if( password ){
         const salt = bcryptjs.genSaltSync();
         rest.password = bcryptjs.hashSync(password,salt);

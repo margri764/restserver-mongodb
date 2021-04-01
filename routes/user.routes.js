@@ -7,7 +7,7 @@ const { usersGet, usersPost, usersPut, usersDelete } = require ('../controllers/
 
 const { isRoleValid, checkEmail, checkId } = require('../helpers/db-validators');
 
-const checkToken = require('../middlewares/ckeck-jwt');
+const {checkToken} = require('../middlewares/check-jwt');
 const  { adminRole, multiRole } = require('../middlewares/check-role');
 const { checkFields } = require('../middlewares/check-fields');
 
