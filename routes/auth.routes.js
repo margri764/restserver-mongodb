@@ -4,7 +4,7 @@ const router = Router();
 
 const { login, googleSignIn } = require('../controllers/auth.controllers');
 
-const { checkFields } = require ('../middlewares/check-fields');
+const { checkFields } = require ('../middlewares');
 
 
 
@@ -15,7 +15,7 @@ router.post('/login',[
 ],login);  
 
 router.post('/google',[
-    check('id_token','el id_token es necesario').not().isEmpty(),
+    check('idToken','el id_token es necesario').not().isEmpty(),
     checkFields
 ],googleSignIn);  
 

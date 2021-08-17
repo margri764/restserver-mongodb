@@ -8,8 +8,8 @@ const UserSchema = Schema({
     email: {
         type: String,
         required: [true,'el correo es obligatorio'],
-        unique: true
-    },
+        unique: true,
+        },
     password: {
         type: String,
         required: 'la contraseña es obligatoria',
@@ -20,7 +20,7 @@ const UserSchema = Schema({
     role: {
         type: String,
         required: true,
-        default: 'USER_ROE',
+        default: 'USER_ROLE',
         emun: [ 'ADMIN_ROLE','USER_ROLE']
     },
     state: {
@@ -35,8 +35,9 @@ const UserSchema = Schema({
 });
 
 UserSchema.methods.toJSON = function(){
-    const {__v,password,_id,...usuario} = this.toObject();
-    usuario.uid= _id;
+    const {__v,password,...usuario} = this.toObject();
+    // const {__v,password,_id,...usuario} = this.toObject();
+    // usuario.uid= _id;
     return usuario; 
 }
 

@@ -5,23 +5,18 @@ const Usuario = require ('../models/usuario');
 
 const usersGet = async (req,res=response)=>{
 
-  
-    // const usuarios = await Usuario.find( {state:true} )
-    //         .skip( Number (desde))
-    //         .limit( Number (limite));
-
-    // const total = await Usuario.countDocuments( {state:true}); 
-    const { limite=15 , desde =0 }=req.query;
-    const [ total,usuarios] = await Promise.all([
+    const { limit , from }=req.query;
+    const [ total, usuarios] = await Promise.all([
         Usuario.countDocuments( {state:true}),
         Usuario.find( {state:true} )
-            .skip( Number (desde))
-            .limit( Number (limite))
-    ])
+            .skip( Number (from))
+            .limit( Number (limit))
+    ])  
    
+
     res.json({ 
-        total,     
-       usuarios
+        // total,     
+      usuarios
 
     });
 }
@@ -31,6 +26,8 @@ const usersPost= async (req, res = response) => {
  
 
     const {name, email, password,role}= req.body
+    console.log(req)
+    
     const usuario = new Usuario ({name,email, password,role});
     
     const checkEmail = await Usuario.findOne({email});
@@ -45,6 +42,7 @@ const usersPost= async (req, res = response) => {
 
     await usuario.save();
     res.json({
+        msg:'desde backend',
         usuario
     })
 
@@ -61,10 +59,12 @@ const usersPut= async (req, res) => {
         rest.password = bcryptjs.hashSync(password,salt);
     }
 
-    const usuario = await Usuario.findByIdAndUpdate( id,rest )
+    const usuario = await Usuario.findByIdAndUpdate( id,rest );
+
     res.json({    
         msg:'put API - controller',
-        usuario
+        usuario, 
+        id
     });
 }
 

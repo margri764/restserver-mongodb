@@ -5,7 +5,7 @@ const Usuario = require ('../models/usuario');
 const Category = require ('../models/category');
 const Product = require('../models/product');
 
-const isRoleValid =async (role='')=>{
+const isRoleValid =async (role='USER_ROLE')=>{
     const checkRol = await Role.findOne({role});
     if(!checkRol){
         throw new Error (`el role ${role} no esta regitrado en DB`)
@@ -44,11 +44,22 @@ const checkId = async ( id ) =>{
           }
   }
 
+   const validColections =  ( colection='', colections=[] ) => {
+
+      const validColection = colections.includes(colection);
+      if(!validColection){
+
+        throw new Error (`la coleccion ${colection} no esta permitida solo ${colections}`)
+      }
+      return true;
+
+   } 
 
 module.exports={
     isRoleValid,
     checkEmail,
     checkId,
     checkCategory,
-    checkProduct
+    checkProduct,
+    validColections
 }
